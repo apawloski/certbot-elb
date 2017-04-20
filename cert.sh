@@ -41,7 +41,7 @@ function attempt_cert_create {
                    --keep-until-expiring \
                    --email $EMAIL \
                    -d $DOMAIN \
-                   --test-cert \ # Remove this once finished debugging
+                   --test-cert \
                    --agree-tos \
                    -n \
                    --preferred-challenges http
@@ -57,8 +57,8 @@ function main {
 
   # Certbot ran succesfully. Was anything created?
   if [ -e /etc/letsencrypt/live/$DOMAIN/cert.pem ]; then
-    echo "New certificate created for $DOMAIN. Updating ALB."
-    update_alb
+    echo "New certificate created for $DOMAIN. This is where we might update a load balancer."
+#    update_alb
   else
     echo "Certbot ran succesfully, but no certificate generated for $DOMAIN. Probably because the cert was not yet ready for renewal."
   fi
